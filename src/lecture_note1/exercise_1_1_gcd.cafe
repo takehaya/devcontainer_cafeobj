@@ -3,6 +3,7 @@ op gcd : Nat Nat -> Nat .
 var X : Nat .
 var NzY : NzNat .
 eq gcd(X,0) = X .
+-- rem は剰余を求める演算子
 eq gcd(X,NzY) = gcd(NzY,X rem NzY) .
 red gcd(0,0) . -- 0と0の最大公約数を計算
 red gcd(2,0) . -- 2と0の最大公約数を計算

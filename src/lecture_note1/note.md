@@ -1,4 +1,5 @@
 # 演習問題
+cf. [http://www.jaist.ac.jp/~ogata/lecture/tokyo-i217/lectureNote1.pdf](http://www.jaist.ac.jp/~ogata/lecture/tokyo-i217/lectureNote1.pdf)
 
 1. 各スライドに示されたプログラムを個別のファイルとして入力し、CafeOBJに読み込んでテストを行いなさい。CafeOBJプログラムが書かれたファイル名の拡張子は `.cafe` であることに注意してください（例: `fact.cafe`）。
 
@@ -38,3 +39,59 @@
 9. タケウチ関数の定義を調べ、それをCafeOBJで記述し、いくつかの自然数で実行しなさい。タケウチ関数を小さな自然数で計算する場合に時間がかかる理由を調査しなさい。
 
 10. 講義ノートにあるプログラムを他の関数型プログラミング言語（例：Standard ML）で作成し、その処理系（例：SML#）で実行しなさい。
+
+---
+man コマンドみたいなのがあるみたいなのでmodule内部の定義を探すときはこれが便利そう
+```
+  
+CafeOBJ> names NAT
+.
+(でかいので略)
+
+CafeOBJ> show NAT
+sys:mod! NAT
+      principal-sort Nat
+{
+  imports {
+    protecting (NZNAT)
+    protecting (NAT-VALUE)
+  }
+  signature {
+    op s _ : Nat -> NzNat { prec: 15 }
+    pred _ >= _ : Nat Nat  { prec: 51 }
+    pred _ > _ : Nat Nat  { prec: 51 }
+    pred _ <= _ : Nat Nat  { prec: 51 }
+    pred _ < _ : Nat Nat  { prec: 51 }
+    op _ * _ : Nat Nat -> Nat { assoc comm idr: 1 prec: 31 r-assoc }
+    op _ + _ : Nat Nat -> Nat { assoc comm idr: 0 prec: 33 r-assoc }
+    op sd : Nat Nat -> Nat { comm prec: 0 }
+    op _ quo _ : Nat NzNat -> Nat { prec: 31 }
+    op _ rem _ : Nat NzNat -> Nat { prec: 31 l-assoc }
+    pred _ divides _ : NzNat Nat  { prec: 51 }
+    op p _ : NzNat -> Nat { prec: 15 }
+  }
+  axioms {
+    var M : Nat
+    var N : Nat
+    var NN : NzNat
+    eq  sd(M,N) = #! (abs (- m n)) .
+    eq  (M + N) = #! (+ m n) .
+    eq  (M * N) = #! (* m n) .
+    eq  (M quo NN) = #! (truncate m nn) .
+    eq  (M rem NN) = #! (rem m nn) .
+    eq  (NN divides M) = #! (= 0 (rem m nn)) .
+    eq  (N < 0) = false .
+    eq  (0 < NN) = true .
+    eq  (NN <= 0) = false .
+    eq  (0 <= N) = true .
+    eq  (0 > N) = false .
+    eq  (NN > 0) = true .
+    eq  (0 >= NN) = false .
+    eq  (N >= 0) = true .
+    eq  (s 0) = 1 .
+    eq  (p NN) = #! (- nn 1) .
+    eq [ident0]: (0 + X-ID:Nat) = X-ID .
+    eq [ident1]: (1 * X-ID:Nat) = X-ID .
+  }
+}
+```

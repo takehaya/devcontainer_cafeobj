@@ -1,0 +1,15 @@
+open NAT .
+op sum : Nat -> Nat . 
+var X : Nat .
+
+-- 基底ケース：sum(0) は 0
+eq sum(0) = 0 .
+
+-- 再帰ケース：sum(X) は X + sum(X-1)
+eq sum(X) = X + sum(p X) .
+
+-- テストケース
+red sum(5) .  -- 5 + 4 + 3 + 2 + 1 + 0 = 15
+red sum(10) . -- 10 + 9 + ... + 0 = 55
+
+close

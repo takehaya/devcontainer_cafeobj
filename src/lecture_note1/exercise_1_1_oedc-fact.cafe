@@ -1,0 +1,22 @@
+open NAT .
+op cond : Bool Nat Nat -> Nat .
+op g : Nat Nat -> Nat .
+op oedc-fact : Nat -> Nat .
+vars X Y : Nat .  
+var NzX : NzNat .
+
+-- 条件式 cond
+eq cond(true, X, Y) = X .
+eq cond(false, X, Y) = Y .
+
+-- 関数 g：再帰的に積を計算
+eq g(X, Y) = cond(X > Y, g(X, 2 * Y) * g(sd(X, Y), 2 * Y), X) .
+
+-- Odd-Even Divide & Conquer Factorial の定義
+eq oedc-fact(0) = 1 .
+eq oedc-fact(NzX) = g(NzX, 1) .
+
+-- 再帰的な計算
+red oedc-fact(10000) . -- 大きな数の階乗も計算可能
+
+close

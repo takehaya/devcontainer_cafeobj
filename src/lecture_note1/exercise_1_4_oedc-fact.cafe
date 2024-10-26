@@ -1,0 +1,22 @@
+open NAT .
+op cond : Bool Nat Nat -> Nat .
+op g : Nat Nat -> Nat .
+op oedc-sum : Nat -> Nat .  -- Odd-Even Divide & Conquerでの和
+vars X Y : Nat .
+
+-- 条件式 cond：条件に応じて X または Y を返す
+eq cond(true, X, Y) = X .
+eq cond(false, X, Y) = Y .
+
+-- 再帰的な部分計算関数 g
+eq g(X, Y) = cond(X > Y, g(X, 2 * Y) + g(sd(X, Y), 2 * Y), X) .
+
+-- Odd-Even Divide & Conquer による和の計算
+eq oedc-sum(0) = 0 .
+eq oedc-sum(X) = g(X, 1) .
+
+-- テストケース
+red oedc-sum(5) .  -- 5 + 4 + 3 + 2 + 1 + 0 = 15
+red oedc-sum(10) . -- 10 + 9 + ... + 0 = 55
+
+close

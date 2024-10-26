@@ -9,6 +9,6 @@ red fact(1) .
 red fact(10) .
 red fact(100) .
 red fact(1000) .
-red fact(10000) .
+-- red fact(10000) . -- -- reduce in %NAT : (fact(10000)):NatINFO: Control stack guard page unprotected...
 -- red fact(100000) . -- stack overflow
 close

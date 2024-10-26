@@ -1,0 +1,27 @@
+open NAT .
+
+-- 条件式 if(if文の代わり)
+op if : Bool Nat Nat -> Nat .
+vars X Y : Nat .  
+eq if(true, X, Y) = X .
+eq if(false, X, Y) = Y .
+
+-- 基底部
+op ext-fib : Nat -> Nat .
+var NzX : NzNat .
+eq ext-fib(0) = 0 .
+eq ext-fib(1) = 1 .
+eq ext-fib(2) = 2 .
+
+-- 再帰部
+eq ext-fib(NzX) = if(NzX > 2, 
+                        ext-fib(p NzX) + ext-fib(p p NzX) + ext-fib(p p p NzX), 
+                        ext-fib(p NzX)) .
+
+-- テストケース
+red ext-fib(1) .  -- 結果: 1
+red ext-fib(2) .  -- 結果: 2
+red ext-fib(3) .  -- 結果: 3 = 2 + 1 + 0
+red ext-fib(4) .  -- 結果: 6 = 3 + 2 + 1
+red ext-fib(5) .  -- 結果: 11 = 6 + 3 + 2
+close
