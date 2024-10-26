@@ -11,6 +11,7 @@
                 "ms-azuretools.vscode-docker",
                 "mosapride.zenkaku",
                 "oderwat.indent-rainbow",
+                "canhminhdo.cafeobj"
             ]
         }
     }
