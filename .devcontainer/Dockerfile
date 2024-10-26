@@ -28,7 +28,7 @@ RUN apt-get update && \
     libxmlsec1-dev \
     libffi-dev \
     liblzma-dev \
-    sbcl  # SBCL（Common Lisp）を追加
+    sbcl
 
 # CafeOBJのソースをクローンし、特定のタグをチェックアウトしてインストール
 RUN git clone https://github.com/CafeOBJ/cafeobj.git $HOME/cafeobj && \
