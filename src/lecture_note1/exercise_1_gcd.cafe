@@ -1,0 +1,12 @@
+open NAT . -- 自然数が定義されてるNATモジュールっていうやつがある
+op gcd : Nat Nat -> Nat .
+var X : Nat .
+var NzY : NzNat .
+eq gcd(X,0) = X .
+eq gcd(X,NzY) = gcd(NzY,X rem NzY) .
+red gcd(0,0) . -- 0と0の最大公約数を計算
+red gcd(2,0) . -- 2と0の最大公約数を計算
+red gcd(0,2) . -- 0と2の最大公約数を計算
+red gcd(24,36) . -- 24と36の最大公約数を計算
+red gcd(2015,31031) . -- 2015と31031の最大公約数を計算
+close
